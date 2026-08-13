@@ -1,0 +1,2 @@
+#pragma code_page(65001)
+1 /* CREATEPROCESS_MANIFEST_RESOURCE_ID */ 24 /* RT_MANIFEST */ "C:/Users/Joefi/source/repos/MP3Lint/out/build/x64-debug/CMakeFiles/MP3Lint.dir/embed.manifest"
