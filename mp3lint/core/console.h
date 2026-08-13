@@ -9,7 +9,10 @@
 
 class Console {
 public:
-	static Console& GetInstance();
+	static Console& GetInstance() {
+		static Console instance;
+		return instance;
+	}
 
 	// Callbacks for routing output to the GUI widget
 	using OutputCallback = std::function<void(std::string_view)>;

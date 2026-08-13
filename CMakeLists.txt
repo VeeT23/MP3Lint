@@ -18,17 +18,6 @@ FetchContent_Declare(json
 )
 FetchContent_MakeAvailable(json)
 
-FetchContent_Declare(taglib
-    GIT_REPOSITORY https://github.com/taglib/taglib.git
-    GIT_TAG v2.0.2
-)
-
-set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
-set(BUILD_TESTS OFF CACHE BOOL "" FORCE)
-set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-set(BUILD_BINDINGS OFF CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(taglib)
-
 get_property(targets DIRECTORY PROPERTY BUILDSYSTEM_TARGETS)
 message(STATUS "Targets: ${targets}")
 
@@ -38,17 +27,19 @@ add_executable(MP3Lint
     mp3lint/app/ui/directory_viewer.cpp
     mp3lint/core/linter.h
     mp3lint/core/linter.cpp
-    "mp3lint/scan/directory_scanner/directory_scanner.h"
-    "mp3lint/model/album.h"
-    "mp3lint/model/song.h"
-    "mp3lint/model/library.h"
-    "mp3lint/app/app.h"
-    "mp3lint/app/app.cpp"
-    "mp3lint/scan/directory_scanner/directory_scanner.cpp"
-    "mp3lint/scan/library_builder.h"
-    "mp3lint/scan/library_builder.cpp"
-    "mp3lint/scan/song_parser/song_parser.h"
-    "mp3lint/scan/song_parser/song_parser.cpp")
+    mp3lint/scan/directory_scanner/directory_scanner.h
+    mp3lint/model/album.h
+    mp3lint/model/song.h
+    mp3lint/model/library.h
+    mp3lint/app/app.h
+    mp3lint/app/app.cpp
+    mp3lint/scan/directory_scanner/directory_scanner.cpp
+    mp3lint/scan/library_builder.h
+    mp3lint/scan/library_builder.cpp
+    mp3lint/scan/song_parser/song_parser.h
+    mp3lint/scan/song_parser/song_parser.cpp
+    mp3lint/core/console.h
+    mp3lint/core/console.cpp)
 
-target_link_libraries(MP3Lint PRIVATE Qt6::Widgets nlohmann_json::nlohmann_json TagLib::tag)
+target_link_libraries(MP3Lint PRIVATE Qt6::Widgets nlohmann_json::nlohmann_json)
 target_include_directories(MP3Lint PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})

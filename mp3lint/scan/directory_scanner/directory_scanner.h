@@ -41,4 +41,4 @@ public:
 	nlohmann::json to_json() const;
 };
 
-inline ScanResult scan_directory(const std::filesystem::path& directory_path);
+ScanResult scan_directory(const std::filesystem::path& directory_path);

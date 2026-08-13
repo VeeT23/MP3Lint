@@ -1,10 +1,5 @@
 #include "console.h"
 
-Console& Console::GetInstance() {
-	static Console instance;
-	return instance;
-}
-
 void Console::SetOutputCallback(OutputCallback callback) {
 	std::lock_guard<std::mutex> lock(m_mutex);
 	m_outputCallback = std::move(callback);
@@ -67,4 +62,3 @@ std::string Console::ReadLine() {
 	std::getline(std::cin, input);
 	return input;
 }
-```

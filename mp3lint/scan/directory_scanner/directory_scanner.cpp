@@ -32,7 +32,7 @@ nlohmann::json ScanResult::to_json() const {
 	return j;
 }
 
-inline ScanResult scan_directory(const std::filesystem::path& directory_path)
+ScanResult scan_directory(const std::filesystem::path& directory_path)
 {
 	ScanResult result;
 	auto& entries = result.entries;

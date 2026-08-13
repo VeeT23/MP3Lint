@@ -1,5 +1,0 @@
-set(__QT_DEPLOY_TARGET_tag_FILE C:/Users/Joefi/source/repos/MP3Lint/out/build/x64-debug/_deps/taglib-build/taglib/tag.lib)
-set(__QT_DEPLOY_TARGET_tag_TYPE STATIC_LIBRARY)
-set(__QT_DEPLOY_TARGET_MP3Lint_FILE C:/Users/Joefi/source/repos/MP3Lint/out/build/x64-debug/MP3Lint.exe)
-set(__QT_DEPLOY_TARGET_MP3Lint_TYPE EXECUTABLE)
-set(__QT_DEPLOY_TARGET_MP3Lint_RUNTIME_DLLS C:/Qt/6.11.1/msvc2022_64/bin/Qt6Widgetsd.dll;C:/Qt/6.11.1/msvc2022_64/bin/Qt6Guid.dll;C:/Qt/6.11.1/msvc2022_64/bin/Qt6Cored.dll)
