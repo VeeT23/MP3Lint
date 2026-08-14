@@ -17,6 +17,6 @@ public:
 	void scan_library(const std::string& library_path);
 
 private:
-	std::string library_file_path;
+	std::filesystem::path library_file_path;
 	Library library;
 };

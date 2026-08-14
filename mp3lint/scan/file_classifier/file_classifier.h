@@ -44,7 +44,9 @@ FileType identify_file_type(const std::filesystem::path& file_path)
 	};
 
 	static const std::unordered_set<std::string> other_extensions = {
-		".txt"
+		".txt",
+		".pdf",
+		".ini" // Hidden .ini files are used by windows for whatever
 	};
 
 	std::string extension = file_path.extension().string();
@@ -85,6 +87,17 @@ struct ClassifyResult {
 	std::vector<FileIndex> playlist_entries;
 	std::vector<FileIndex> other_entries;
 	std::vector<FileIndex> unknown_entries;
+
+	nlohmann::json overview_to_json() const
+	{
+		nlohmann::json j;
+		j["audio_entries"] = audio_entries.size();
+		j["image_entries"] = image_entries.size();
+		j["playlist_entries"] = playlist_entries.size();
+		j["other_entries"] = other_entries.size();
+		j["unknown_entries"] = unknown_entries.size();
+		return j;
+	}
 };
 
 ClassifyResult classify_files(std::vector<FileEntry>& entries)
@@ -93,24 +106,29 @@ ClassifyResult classify_files(std::vector<FileEntry>& entries)
 
 	result.entries = entries;
 
-	std::sort(entries.begin(), entries.end());
+	std::sort(result.entries.begin(), result.entries.end());
 
 	for (FileIndex idx = 0; idx < result.entries.size(); idx++)
 	{
 		FileEntry& entry = result.entries[idx];
 		FileType type = identify_file_type(entry.file_path);
-		switch(type)
+		switch (type)
 		{
 		case FileType::AUDIO:
 			result.audio_entries.push_back(idx);
+			break;
 		case FileType::IMAGE:
-			result.audio_entries.push_back(idx);
+			result.image_entries.push_back(idx);
+			break;
 		case FileType::PLAYLIST:
-			result.audio_entries.push_back(idx);
+			result.playlist_entries.push_back(idx);
+			break;
 		case FileType::OTHER:
-			result.audio_entries.push_back(idx);
+			result.other_entries.push_back(idx);
+			break;
 		case FileType::UNKNOWN:
-			result.audio_entries.push_back(idx);
+			result.unknown_entries.push_back(idx);
+			break;
 		default:
 			throw std::runtime_error("Unrecognized FileType enum:" + std::to_string(static_cast<int>(type)));
 		}

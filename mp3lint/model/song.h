@@ -2,12 +2,13 @@
 
 #include <string>
 #include <vector>
+#include <filesystem>
 
 using SongTitle = std::string;
 using ArtistName = std::string;
 using Genre = std::string;
 
-struct Song {
+struct SongMetadata {
 
 	SongTitle title;
 	std::vector<ArtistName> artists;
@@ -21,3 +22,10 @@ struct Song {
 	uint16_t total_tracks;
 	uint16_t total_discs;
 };
+
+struct Song {
+	
+	std::filesystem::path file_path;
+	SongMetadata data;
+};
+
