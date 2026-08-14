@@ -1,6 +1,6 @@
 #include "album.h"
 #include <vector>
 
-class Library {
+struct Library {
 	std::vector<Album*> albums;
 };

@@ -6,7 +6,7 @@
 
 using AlbumName = std::string;
 
-class Album {
+struct Album {
 
 	AlbumName name;
 	std::vector<ArtistName> artists;

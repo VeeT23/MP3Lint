@@ -39,7 +39,9 @@ add_executable(MP3Lint
     mp3lint/scan/song_parser/song_parser.h
     mp3lint/scan/song_parser/song_parser.cpp
     mp3lint/core/console.h
-    mp3lint/core/console.cpp)
+    mp3lint/core/console.cpp 
+    mp3lint/rules/filesystem/cover_art_check.h 
+    mp3lint/scan/file_classifier/file_classifier.h)
 
 target_link_libraries(MP3Lint PRIVATE Qt6::Widgets nlohmann_json::nlohmann_json)
 target_include_directories(MP3Lint PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})

@@ -7,9 +7,7 @@ using SongTitle = std::string;
 using ArtistName = std::string;
 using Genre = std::string;
 
-class Song {
-public:
-	Song() = default;
+struct Song {
 
 	SongTitle title;
 	std::vector<ArtistName> artists;

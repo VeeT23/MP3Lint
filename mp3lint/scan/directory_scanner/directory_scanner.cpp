@@ -5,10 +5,6 @@ nlohmann::json ScanResult::overview_to_json() const
 	nlohmann::json j;
 	j["total_size_bytes"] = total_size_bytes;
 	j["total_files"] = total_files;
-	j["total_files_audio"] = total_files_audio;
-	j["total_files_image"] = total_files_image;
-	j["total_files_playlist"] = total_files_playlist;
-	j["total_files_other"] = total_files_other;
 	return j;
 }
 
@@ -16,14 +12,9 @@ nlohmann::json ScanResult::to_json() const {
 	nlohmann::json j;
 	j["total_size_bytes"] = total_size_bytes;
 	j["total_files"] = total_files;
-	j["total_files_audio"] = total_files_audio;
-	j["total_files_image"] = total_files_image;
-	j["total_files_playlist"] = total_files_playlist;
-	j["total_files_other"] = total_files_other;
 	for (const auto& entry : entries) {
 		nlohmann::json entry_json;
 		entry_json["file_path"] = entry.file_path.string();
-		entry_json["type"] = static_cast<int>(entry.type);
 		entry_json["size_bytes"] = entry.size_bytes;
 		entry_json["date_modified"] = entry.date_modified;
 		entry_json["extension"] = entry.extension;
@@ -56,23 +47,6 @@ ScanResult scan_directory(const std::filesystem::path& directory_path)
 
 		std::string ext_lower = file_entry.extension;
 		std::ranges::transform(ext_lower, ext_lower.begin(), [](unsigned char c) { return std::tolower(c); });
-
-		if (ext_lower == ".mp3" || ext_lower == ".flac" || ext_lower == ".wav" || ext_lower == ".aac" || ext_lower == ".ogg" || ext_lower == ".m4a") {
-			file_entry.type = FileEntry::FileType::AUDIO;
-			result.total_files_audio += 1;
-		}
-		else if (ext_lower == ".jpg" || ext_lower == ".jpeg" || ext_lower == ".png" || ext_lower == ".gif" || ext_lower == ".bmp") {
-			file_entry.type = FileEntry::FileType::IMAGE;
-			result.total_files_image += 1;
-		}
-		else if (ext_lower == ".m3u" || ext_lower == ".m3u8" || ext_lower == ".pls") {
-			file_entry.type = FileEntry::FileType::PLAYLIST;
-			result.total_files_playlist += 1;
-		}
-		else {
-			file_entry.type = FileEntry::FileType::OTHER;
-			result.total_files_other += 1;
-		}
 
 		std::error_code ec;
 		auto file_size = std::filesystem::file_size(entry, ec);
