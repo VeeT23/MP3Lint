@@ -100,7 +100,7 @@ struct ClassifyResult {
 	}
 };
 
-ClassifyResult classify_files(std::vector<FileEntry>& entries)
+ClassifyResult classify_files(const std::vector<FileEntry>& entries)
 {
 	ClassifyResult result;
 

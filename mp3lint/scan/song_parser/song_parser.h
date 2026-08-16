@@ -1,7 +1,8 @@
 #pragma once
 
 #include "mp3lint/model/song.h"
-
+#include <taglib/fileref.h>
+#include <taglib/tag.h>
 
 #include <filesystem>
 

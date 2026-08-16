@@ -12,14 +12,22 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets)
 qt_standard_project_setup()
 
 include(FetchContent)
-FetchContent_Declare(json
+
+FetchContent_Declare(
+    json
     GIT_REPOSITORY https://github.com/nlohmann/json.git
     GIT_TAG v3.11.3
 )
-FetchContent_MakeAvailable(json)
 
-get_property(targets DIRECTORY PROPERTY BUILDSYSTEM_TARGETS)
-message(STATUS "Targets: ${targets}")
+FetchContent_Declare(
+    taglib
+    GIT_REPOSITORY https://github.com/taglib/taglib.git
+    GIT_TAG v2.2.1
+)
+
+FetchContent_MakeAvailable(json taglib)
+
+get_property(all_targets DIRECTORY PROPERTY BUILDSYSTEM_TARGETS)
 
 add_executable(MP3Lint
     mp3lint/app/main.cpp
@@ -43,5 +51,13 @@ add_executable(MP3Lint
     mp3lint/rules/filesystem/cover_art_check.h 
     mp3lint/scan/file_classifier/file_classifier.h)
 
-target_link_libraries(MP3Lint PRIVATE Qt6::Widgets nlohmann_json::nlohmann_json)
-target_include_directories(MP3Lint PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(MP3Lint PRIVATE
+    Qt6::Widgets
+    nlohmann_json::nlohmann_json
+    tag
+)
+
+target_include_directories(MP3Lint PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${taglib_SOURCE_DIR}
+)
